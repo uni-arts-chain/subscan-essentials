@@ -78,7 +78,7 @@ jobs:
           go test -v ./...
         env:
           REDIS_ADDR: localhost:6379
-          NETWORK_NODE: crab
+          NETWORK_NODE: uart
           MYSQL_HOST: 127.0.0.1
           MYSQL_DB: test
           TEST_MOD: true
