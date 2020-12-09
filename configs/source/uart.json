@@ -129,7 +129,22 @@
   "NftItemType": {
     "Collection": "u64",
     "Owner": "AccountId",
-    "Data": "Vec<u8>"
+    "Data": "Vec<u8>",
+    "type": "struct",
+    "type_mapping": [
+      [
+        "Collection",
+        "u64"
+      ],
+      [
+        "Owner",
+        "AccountId"
+      ],
+      [
+        "Data",
+        "Vec<u8>"
+      ]
+    ]
   },
   "FungibleItemType": {
     "Collection": "u64",
@@ -151,7 +166,30 @@
     "item_id": "u64",
     "value": "u64",
     "owner": "AccountId",
-    "price": "u64"
+    "price": "u64",
+    "type": "struct",
+    "type_mapping": [
+      [
+        "collection_id",
+        "u64"
+      ],
+      [
+        "item_id",
+        "u64"
+      ],
+      [
+        "value",
+        "u64"
+      ],
+      [
+        "owner",
+        "AccountId"
+      ],
+      [
+        "price",
+        "u64"
+      ]
+    ]
   },
   "Ownership": {
     "owner": "AccountId",
@@ -173,7 +211,54 @@
     "CustomDataSize": "u32",
     "OffchainSchema": "Vec<u8>",
     "Sponsor": "AccountId",
-    "UnconfirmedSponsor": "AccountId"
+    "UnconfirmedSponsor": "AccountId",
+    "type": "struct",
+    "type_mapping": [
+      [
+        "Owner",
+        "AccountId"
+      ],
+      [
+        "Mode",
+        "CollectionMode"
+      ],
+      [
+        "Access",
+        "u8"
+      ],
+      [
+        "DecimalPoints",
+        "u32"
+      ],
+      [
+        "Name",
+        "Vec<u16>"
+      ],
+      [
+        "Description",
+        "u32"
+      ],
+      [
+        "TokenPrefix",
+        "Vec<u8>"
+      ],
+      [
+        "CustomDataSize",
+        "u32"
+      ],
+      [
+        "OffchainSchema",
+        "Vec<u8>"
+      ],
+      [
+        "Sponsor",
+        "AccountId"
+      ],
+      [
+        "UnconfirmedSponsor",
+        "AccountId"
+      ]
+    ]
   },
   "Pool": {
     "id": "Id",

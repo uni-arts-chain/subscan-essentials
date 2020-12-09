@@ -149,7 +149,7 @@ func (m *MockDao) BlockAsJson(c context.Context, block *model.ChainBlock) *model
 	return &model.ChainBlockJson{}
 }
 
-func (m *MockDao) CreateEvent(txn *dao.GormDB, event *model.ChainEvent) error {
+func (m *MockDao) CreateEvent(txn *dao.GormDB, event *model.ChainEvent, blockHash string) error {
 	return nil
 }
 

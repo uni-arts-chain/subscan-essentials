@@ -1,6 +1,7 @@
 package util
 
 import (
+	"encoding/binary"
 	"encoding/hex"
 	"fmt"
 	"strings"
@@ -40,4 +41,10 @@ func BytesToHex(b []byte) string {
 	c := make([]byte, hex.EncodedLen(len(b)))
 	hex.Encode(c, b)
 	return string(c)
+}
+
+func IntToEncode64Hex(value int) string {
+	bs := make([]byte, 8)
+	binary.LittleEndian.PutUint64(bs, uint64(value))
+	return BytesToHex(bs)
 }

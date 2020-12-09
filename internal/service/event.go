@@ -23,7 +23,7 @@ func (s *Service) AddEvent(
 		event.EventIndex = fmt.Sprintf("%d-%d", block.BlockNum, event.ExtrinsicIdx)
 		event.BlockNum = block.BlockNum
 
-		if err = s.dao.CreateEvent(txn, &event); err == nil {
+		if err = s.dao.CreateEvent(txn, &event, block.Hash); err == nil {
 			go s.emitEvent(block, &event, feeMap[event.EventIndex])
 		} else {
 			return 0, err

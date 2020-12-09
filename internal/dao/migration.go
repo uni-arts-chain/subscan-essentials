@@ -2,6 +2,7 @@ package dao
 
 import (
 	"context"
+
 	"github.com/itering/subscan/model"
 )
 
@@ -26,8 +27,11 @@ func (d *Dao) InternalTables(blockNum int) (models []interface{}) {
 			model.ChainBlock{BlockNum: blockNum},
 			model.ChainEvent{BlockNum: blockNum},
 			model.ChainExtrinsic{BlockNum: blockNum},
-			model.ChainLog{BlockNum: blockNum})
+			model.ChainLog{BlockNum: blockNum},
+			model.NftItem{BlockNum: blockNum},
+			model.NftOrder{BlockNum: blockNum})
 	}
+
 	var tablesName []string
 	for _, m := range models {
 		tablesName = append(tablesName, d.db.Unscoped().NewScope(m).TableName())

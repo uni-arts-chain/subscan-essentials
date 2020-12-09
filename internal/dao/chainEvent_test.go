@@ -8,7 +8,7 @@ import (
 
 func TestDao_CreateEvent(t *testing.T) {
 	txn := testDao.DbBegin()
-	err := testDao.CreateEvent(txn, &testEvent)
+	err := testDao.CreateEvent(txn, &testEvent, "")
 	txn.Commit()
 	assert.NoError(t, err)
 }
@@ -18,7 +18,7 @@ func TestDao_DropEventNotFinalizedData(t *testing.T) {
 
 	tempEvent := testEvent
 	tempEvent.BlockNum = 947688
-	err := testDao.CreateEvent(txn, &tempEvent)
+	err := testDao.CreateEvent(txn, &tempEvent, "")
 	txn.Commit()
 	assert.NoError(t, err)
 

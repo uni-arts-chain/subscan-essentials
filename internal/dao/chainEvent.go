@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-func (d *Dao) CreateEvent(txn *GormDB, event *model.ChainEvent) error {
+func (d *Dao) CreateEvent(txn *GormDB, event *model.ChainEvent, blockHash string) error {
 	var incrCount int
 	extrinsicHash := util.AddHex(event.ExtrinsicHash)
 	e := model.ChainEvent{
@@ -26,6 +26,10 @@ func (d *Dao) CreateEvent(txn *GormDB, event *model.ChainEvent) error {
 	if query.RowsAffected > 0 {
 		incrCount++
 		_ = d.IncrMetadata(context.TODO(), "count_event", incrCount)
+		if e.ModuleId == "nft" {
+			d.CreateNft(txn, &e, blockHash)
+		}
+
 	}
 	return d.checkDBError(query.Error)
 }

@@ -148,6 +148,49 @@ func (c ChainLog) TableName() string {
 	return fmt.Sprintf("chain_logs_%d", c.BlockNum/SplitTableBlockNum)
 }
 
+type NftItem struct {
+	Id           int    `json:"-"`
+	EventIndex   string `sql:"default: null;size:100;" json:"event_index"`
+	BlockNum     int    `gorm:"column:block_num; default:null" json:"block_num"`
+	ExtrinsicIdx int    `json:"extrinsic_idx"`
+	Name         string `gorm:"type:text; default:null" json:"-"`
+	CollectionId int    `gorm:"column:collection_id; default:null" json:"collection_id"`
+	ItemId       int    `gorm:"column:item_id; default:null" json:"item_id"`
+	Sender       string `json:"sender"`
+	Author       string `json:"author"`
+	Status       string `gorm:"type:varchar(50)" json:"status"`
+	EventIdx     int    `json:"event_idx"`
+	Properties   string
+}
+
+func (c NftItem) TableName() string {
+	if c.BlockNum/SplitTableBlockNum == 0 {
+		return "nft_items"
+	}
+	return fmt.Sprintf("nft_items_%d", c.BlockNum/SplitTableBlockNum)
+}
+
+type NftOrder struct {
+	Id           int    `json:"-"`
+	EventIndex   string `sql:"default: null;size:100;" json:"event_index"`
+	BlockNum     int    `gorm:"column:block_num; default:null" json:"block_num" `
+	ExtrinsicIdx int    `json:"extrinsic_idx"`
+	CollectionId int    `gorm:"column:collection_id; default:null" json:"collection_id"`
+	ItemId       int    `gorm:"column:item_id; default:null" json:"item_id"`
+	Value        decimal.Decimal `gorm:"column:value; type:decimal(32,16);default:null" json:"value"`
+	Price        decimal.Decimal `gorm:"column:price; type:decimal(32,16);default:null" json:"price"`
+	Sender       string `json:"sender"`
+	Status       string `gorm:"type:varchar(50)" json:"status"`
+	EventIdx     int    `json:"event_idx"`
+}
+
+func (c NftOrder) TableName() string {
+	if c.BlockNum/SplitTableBlockNum == 0 {
+		return "nft_orders"
+	}
+	return fmt.Sprintf("nft_orders_%d", c.BlockNum/SplitTableBlockNum)
+}
+
 type ExtrinsicParam struct {
 	Name     string      `json:"name"`
 	Type     string      `json:"type"`

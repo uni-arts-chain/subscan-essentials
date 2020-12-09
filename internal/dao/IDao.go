@@ -27,7 +27,7 @@ type IDao interface {
 	GetFillFinalizedBlockNum(c context.Context) (num int, err error)
 	GetBlockList(page, row int) []model.ChainBlock
 	BlockAsJson(c context.Context, block *model.ChainBlock) *model.ChainBlockJson
-	CreateEvent(txn *GormDB, event *model.ChainEvent) error
+	CreateEvent(txn *GormDB, event *model.ChainEvent, hash string) error
 	DropEventNotFinalizedData(blockNum int, finalized bool) bool
 	GetEventByBlockNum(blockNum int, where ...string) []model.ChainEventJson
 	GetEventList(page, row int, order string, where ...string) ([]model.ChainEvent, int)
