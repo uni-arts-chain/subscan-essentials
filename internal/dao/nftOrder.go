@@ -3,19 +3,25 @@ package dao
 import (
 	"strconv"
 
+	"github.com/go-kratos/kratos/pkg/log"
 	"github.com/itering/subscan/model"
 	"github.com/itering/subscan/util"
 	"github.com/shopspring/decimal"
 )
 
 func (d *Dao) CreateNftOrder(txn *GormDB, ce *model.ChainEvent) error {
+
 	params := []map[string]interface{}{}
 	util.UnmarshalAny(&params, ce.Params)
 	cid := params[0]["value"]
 	iid := params[1]["value"]
 	value := params[2]["value"]
 	price := params[3]["value"]
-	sender := params[4]["value"]
+	sender := ""
+	if len(params) > 4 {
+		sender = util.ToString(params[4]["value"])
+	}
+
 	collectionId,_ := strconv.Atoi(util.ToString(cid))
 	itemId,_ := strconv.Atoi(util.ToString(iid))
 	e := model.NftOrder{
@@ -27,10 +33,15 @@ func (d *Dao) CreateNftOrder(txn *GormDB, ce *model.ChainEvent) error {
 		Value:        decimal.RequireFromString(util.ToString(value)).Div(decimal.RequireFromString("100000000000")),
 		Price:        decimal.RequireFromString(util.ToString(price)).Div(decimal.RequireFromString("100000000000")),
 		EventIdx:     ce.EventIdx,
-		Sender:       util.ToString(sender),
+		Sender:       sender,
 		Status:       "create",
 	}
+
 	query := txn.Create(&e)
+	if query.Error != nil {
+		log.Error("Nft order create failed:" + query.Error.Error())
+
+	}
 	return d.checkDBError(query.Error)
 }
 
