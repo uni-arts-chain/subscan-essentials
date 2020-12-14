@@ -160,7 +160,7 @@ type NftItem struct {
 	Author       string `json:"author"`
 	Status       string `gorm:"type:varchar(50)" json:"status"`
 	EventIdx     int    `json:"event_idx"`
-	Properties   string
+	Properties   string `gorm:"type:MEDIUMTEXT" json:"properties"`
 }
 
 func (c NftItem) TableName() string {
