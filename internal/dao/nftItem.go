@@ -69,7 +69,7 @@ func (d *Dao) CreateNftItem(txn *GormDB, ce *model.ChainEvent, blockHash string)
 				log.Info("get Decode failure, error=[%v]\n, block_num=[%v]\n, EventIdx=[%v]", err, ce.BlockNum, ce.EventIdx)
 			} else {
 				result := dataD.ToMapString()
-				properties, _ := result["Data"]
+				properties, _ = result["Data"]
 				bproperties, err := base64.StdEncoding.DecodeString(properties)
 				if err != nil {
 					log.Info("get base64 Decode failure, error=[%v]\n, block_num=[%v]\n, EventIdx=[%v]", err, ce.BlockNum, ce.EventIdx)
