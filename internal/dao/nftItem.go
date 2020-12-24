@@ -60,6 +60,7 @@ func (d *Dao) CreateNftItem(txn *GormDB, ce *model.ChainEvent, blockHash string)
 	properties := ""
 	name := ""
 	author := ""
+	itemHash := ""
 	if dataHex, err := v.ToString(); err == nil {
 		if dataHex == "" {
 			log.Info("get dataHex failure, error=[%v]\n, block_num=[%v]\n, EventIdx=[%v]", err, ce.BlockNum, ce.EventIdx)
@@ -88,6 +89,8 @@ func (d *Dao) CreateNftItem(txn *GormDB, ce *model.ChainEvent, blockHash string)
 					name = infos["name"].(string)
 					author = infos["author"].(string)
 				}
+
+				itemHash, _ = result["item_hash"]
 			}
 		}
 	}
@@ -104,6 +107,7 @@ func (d *Dao) CreateNftItem(txn *GormDB, ce *model.ChainEvent, blockHash string)
 		Author:       author,
 		Status:       "create",
 		Properties:   properties,
+		ItemHash:     itemHash,
 	}
 	query := txn.Create(&e)
 	if query.RowsAffected == 0 {

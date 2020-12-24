@@ -161,6 +161,7 @@ type NftItem struct {
 	Status       string `gorm:"type:varchar(50)" json:"status"`
 	EventIdx     int    `json:"event_idx"`
 	Properties   string `gorm:"type:MEDIUMTEXT" json:"properties"`
+	ItemHash     string `gorm:"type:text; default:null" json:"item_hash"`
 }
 
 func (c NftItem) TableName() string {
@@ -171,17 +172,17 @@ func (c NftItem) TableName() string {
 }
 
 type NftOrder struct {
-	Id           int    `json:"-"`
-	EventIndex   string `sql:"default: null;size:100;" json:"event_index"`
-	BlockNum     int    `gorm:"column:block_num; default:null" json:"block_num" `
-	ExtrinsicIdx int    `json:"extrinsic_idx"`
-	CollectionId int    `gorm:"column:collection_id; default:null" json:"collection_id"`
-	ItemId       int    `gorm:"column:item_id; default:null" json:"item_id"`
+	Id           int             `json:"-"`
+	EventIndex   string          `sql:"default: null;size:100;" json:"event_index"`
+	BlockNum     int             `gorm:"column:block_num; default:null" json:"block_num" `
+	ExtrinsicIdx int             `json:"extrinsic_idx"`
+	CollectionId int             `gorm:"column:collection_id; default:null" json:"collection_id"`
+	ItemId       int             `gorm:"column:item_id; default:null" json:"item_id"`
 	Value        decimal.Decimal `gorm:"column:value; type:decimal(32,16);default:null" json:"value"`
 	Price        decimal.Decimal `gorm:"column:price; type:decimal(32,16);default:null" json:"price"`
-	Sender       string `json:"sender"`
-	Status       string `gorm:"type:varchar(50)" json:"status"`
-	EventIdx     int    `json:"event_idx"`
+	Sender       string          `json:"sender"`
+	Status       string          `gorm:"type:varchar(50)" json:"status"`
+	EventIdx     int             `json:"event_idx"`
 }
 
 func (c NftOrder) TableName() string {
