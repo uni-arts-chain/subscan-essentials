@@ -10,6 +10,7 @@
   "Value": "Vec<u8>",
   "ReasonIndex": "u32",
   "LottoIndex": "u32",
+  "BlockNumber": "u32",
   "LotteryKind": {
     "_enum": [
       "Routine",
@@ -34,7 +35,22 @@
   "NameData": {
     "value": "Value",
     "owner": "AccountId",
-    "expiration": "Option<u32>"
+    "expiration": "Option<u32>",
+    "type": "struct",
+    "type_mapping": [
+      [
+        "value",
+        "Value"
+      ],
+      [
+        "owner",
+        "AccountId"
+      ],
+      [
+        "expiration",
+        "Option<u32>"
+      ]
+    ]
   },
   "Token": {
     "hash": "H256",
@@ -192,6 +208,39 @@
       [
         "price",
         "u64"
+      ]
+    ]
+  },
+  "SignatureAuthentication": {
+    "type": "struct",
+    "type_mapping": [
+      [
+        "collection",
+        "u64"
+      ],
+      [
+        "item",
+        "u64"
+      ],
+      [
+        "names",
+        "Name"
+      ],
+      [
+        "names_owner",
+        "AccountId"
+      ],
+      [
+        "sign_time",
+        "BlockNumber"
+      ],
+      [
+        "memo",
+        "Vec<u8>"
+      ],
+      [
+        "expiration",
+        "Option<BlockNumber>"
       ]
     ]
   },

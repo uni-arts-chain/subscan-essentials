@@ -30,6 +30,10 @@ func (d *Dao) CreateEvent(txn *GormDB, event *model.ChainEvent, blockHash string
 			d.CreateNft(txn, &e, blockHash)
 		}
 
+		if e.ModuleId == "names" {
+			d.CreateNames(txn, &e, blockHash)
+		}
+
 	}
 	return d.checkDBError(query.Error)
 }

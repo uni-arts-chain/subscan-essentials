@@ -29,7 +29,9 @@ func (d *Dao) InternalTables(blockNum int) (models []interface{}) {
 			model.ChainExtrinsic{BlockNum: blockNum},
 			model.ChainLog{BlockNum: blockNum},
 			model.NftItem{BlockNum: blockNum},
-			model.NftOrder{BlockNum: blockNum})
+			model.NftOrder{BlockNum: blockNum},
+			model.Name{BlockNum: blockNum},
+			model.NftSignature{BlockNum: blockNum})
 	}
 
 	var tablesName []string

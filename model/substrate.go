@@ -192,6 +192,47 @@ func (c NftOrder) TableName() string {
 	return fmt.Sprintf("nft_orders_%d", c.BlockNum/SplitTableBlockNum)
 }
 
+type Name struct {
+	Id           int    `json:"-"`
+	EventIndex   string `sql:"default: null;size:100;" json:"event_index"`
+	BlockNum     int    `gorm:"column:block_num; default:null" json:"block_num" `
+	ExtrinsicIdx int    `json:"extrinsic_idx"`
+	Name         string `gorm:"column:name; default:null" json:"name"`
+	Value        string `gorm:"column:value; type:MEDIUMTEXT;default:null" json:"value"`
+	Owner        string `json:"owner"`
+	Expiration   int    `gorm:"column:expiration; default:null" json:"expiration"`
+	EventIdx     int    `json:"event_idx"`
+}
+
+func (c Name) TableName() string {
+	if c.BlockNum/SplitTableBlockNum == 0 {
+		return "names"
+	}
+	return fmt.Sprintf("names_%d", c.BlockNum/SplitTableBlockNum)
+}
+
+type NftSignature struct {
+	Id           int    `json:"-"`
+	EventIndex   string `sql:"default: null;size:100;" json:"event_index"`
+	BlockNum     int    `gorm:"column:block_num; default:null" json:"block_num" `
+	ExtrinsicIdx int    `json:"extrinsic_idx"`
+	CollectionId int    `gorm:"column:collection_id; default:null" json:"collection_id"`
+	ItemId       int    `gorm:"column:item_id; default:null" json:"item_id"`
+	Names        string `gorm:"column:names;default:null" json:"names"`
+	NamesOwner   string `gorm:"column:names_owner;default:null" json:"names_owner"`
+	SignTime     int    `json:"sign_time"`
+	Memo         string `gorm:"type:MEDIUMTEXT" json:"memo"`
+	Expiration   int    `gorm:"column:expiration; default:null" json:"expiration"`
+	EventIdx     int    `json:"event_idx"`
+}
+
+func (c NftSignature) TableName() string {
+	if c.BlockNum/SplitTableBlockNum == 0 {
+		return "nft_signatures"
+	}
+	return fmt.Sprintf("nft_signatures_%d", c.BlockNum/SplitTableBlockNum)
+}
+
 type ExtrinsicParam struct {
 	Name     string      `json:"name"`
 	Type     string      `json:"type"`

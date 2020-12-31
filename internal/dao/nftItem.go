@@ -42,6 +42,11 @@ func (d *Dao) CreateNft(txn *GormDB, ce *model.ChainEvent, blockHash string) err
 	if ce.EventId == "ItemOrderSucceed" {
 		return d.CreateNftOrderSucceed(txn, ce)
 	}
+
+	if ce.EventId == "ItemAddSignature" {
+		return d.CreateNftSignature(txn, ce, blockHash)
+	}
+
 	return nil
 }
 
@@ -119,3 +124,4 @@ func (d *Dao) CreateNftItem(txn *GormDB, ce *model.ChainEvent, blockHash string)
 
 	return d.checkDBError(query.Error)
 }
+

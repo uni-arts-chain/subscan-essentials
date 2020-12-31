@@ -79,6 +79,53 @@ func Int64FromInterface(i interface{}) int64 {
 	return 0
 }
 
+func StringFromInterfaceSlice(i interface{}) string {
+	v := ""
+	switch i.(type) {
+	case []interface{}:
+		is := i.([]interface{})
+		bs := []byte{}
+		for _, d := range is {
+			d := IntFromInterface(d)
+			bs = append(bs, byte(d))
+		}
+		v = string(bs)
+	case []int:
+		is := i.([]int)
+		bs := []byte{}
+		for _, d := range is {
+			d := IntFromInterface(d)
+			bs = append(bs, byte(d))
+		}
+		v = string(bs)
+	case []int64:
+		is := i.([]int64)
+		bs := []byte{}
+		for _, d := range is {
+			d := IntFromInterface(d)
+			bs = append(bs, byte(d))
+		}
+		v = string(bs)
+	case uint64:
+		is := i.([]uint64)
+		bs := []byte{}
+		for _, d := range is {
+			d := IntFromInterface(d)
+			bs = append(bs, byte(d))
+		}
+		v = string(bs)
+	case float64:
+		is := i.([]float64)
+		bs := []byte{}
+		for _, d := range is {
+			d := IntFromInterface(d)
+			bs = append(bs, byte(d))
+		}
+		v = string(bs)
+	}
+	return v
+}
+
 func DecimalFromInterface(i interface{}) decimal.Decimal {
 	switch i := i.(type) {
 	case int:
