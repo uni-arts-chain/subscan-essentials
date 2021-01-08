@@ -90,8 +90,8 @@ func (d *Dao) UpdateName(txn *GormDB, ce *model.ChainEvent, blockHash string) er
 	name := util.StringFromInterfaceSlice(params[0]["value"])
 	nameData := params[1]["value"].(map[string]interface{})
 	owner := util.ToString(nameData["owner"])
-	expiration :=  util.IntFromInterface(nameData["expiration"])
-	value  :=  util.StringFromInterfaceSlice(nameData["value"])
+	expiration := util.IntFromInterface(nameData["expiration"])
+	value := util.StringFromInterfaceSlice(nameData["value"])
 
 	var mname model.Name
 	if txn.Where("name = ?", name).First(&mname).RecordNotFound() {
@@ -115,7 +115,7 @@ func (d *Dao) UpdateName(txn *GormDB, ce *model.ChainEvent, blockHash string) er
 
 		return d.checkDBError(query.Error)
 	} else {
-		if ce.BlockNum > mname.BlockNum || ( ce.BlockNum == mname.BlockNum && ce.EventIdx > mname.EventIdx) {
+		if ce.BlockNum > mname.BlockNum || (ce.BlockNum == mname.BlockNum && ce.EventIdx > mname.EventIdx) {
 			query := txn.Debug().Model(&mname).Updates(map[string]interface{}{"event_index": ce.EventIndex, "block_num": ce.BlockNum, "extrinsic_idx": ce.ExtrinsicIdx, "value": value, "owner": owner, "expiration": expiration, "event_idx": ce.EventIdx})
 			if query.RowsAffected == 0 {
 				log.Info("=====update names failed========" + query.Error.Error())

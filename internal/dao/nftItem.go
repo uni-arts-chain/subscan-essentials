@@ -55,11 +55,11 @@ func (d *Dao) CreateNftItem(txn *GormDB, ce *model.ChainEvent, blockHash string)
 	util.UnmarshalAny(&params, ce.Params)
 	cid := params[0]["value"]
 	iid := params[1]["value"]
-	collectionId,_ := strconv.Atoi(util.ToString(cid))
-	itemId,_ := strconv.Atoi(util.ToString(iid))
-	key := storageKey.EncodeStorageKey("Nft", "NftItemList", util.IntToEncode64Hex(collectionId),  util.IntToEncode64Hex(itemId))
+	collectionId, _ := strconv.Atoi(util.ToString(cid))
+	itemId, _ := strconv.Atoi(util.ToString(iid))
+	key := storageKey.EncodeStorageKey("Nft", "NftItemList", util.IntToEncode64Hex(collectionId), util.IntToEncode64Hex(itemId))
 	v := &rpc.JsonRpcResult{}
-	if err := websocket.SendWsRequest(nil, v, rpc.StateGetStorage(wsNftCreate,  util.AddHex(key.EncodeKey), blockHash)); err != nil {
+	if err := websocket.SendWsRequest(nil, v, rpc.StateGetStorage(wsNftCreate, util.AddHex(key.EncodeKey), blockHash)); err != nil {
 		return fmt.Errorf("websocket send error: %v", err)
 	}
 	properties := ""
@@ -106,7 +106,7 @@ func (d *Dao) CreateNftItem(txn *GormDB, ce *model.ChainEvent, blockHash string)
 		ExtrinsicIdx: ce.ExtrinsicIdx,
 		Name:         name,
 		CollectionId: collectionId,
-		ItemId:      itemId,
+		ItemId:       itemId,
 		EventIdx:     ce.EventIdx,
 		Sender:       "",
 		Author:       author,
@@ -124,4 +124,3 @@ func (d *Dao) CreateNftItem(txn *GormDB, ce *model.ChainEvent, blockHash string)
 
 	return d.checkDBError(query.Error)
 }
-

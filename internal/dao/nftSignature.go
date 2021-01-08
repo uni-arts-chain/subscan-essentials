@@ -15,13 +15,13 @@ import (
 )
 
 type nftSignautre struct {
-	Names []byte `json:"names"`
+	Names      []byte `json:"names"`
 	NamesOwner string `json:"names_owner"`
-	SignTime int `json:"sign_time"`
-	Memo string `json:"memo"`
-	Collection int `json:"collection"`
-	Item int `json:"item"`
-	Expiration int `json:"expiration"`
+	SignTime   int    `json:"sign_time"`
+	Memo       string `json:"memo"`
+	Collection int    `json:"collection"`
+	Item       int    `json:"item"`
+	Expiration int    `json:"expiration"`
 }
 
 func (d *Dao) CreateNftSignature(txn *GormDB, ce *model.ChainEvent, blockHash string) error {
@@ -50,7 +50,7 @@ func (d *Dao) CreateNftSignature(txn *GormDB, ce *model.ChainEvent, blockHash st
 				json.Unmarshal([]byte(dataD), &infos)
 
 				for _, info := range infos {
-					names :=  util.ToString(info.Names)
+					names := util.ToString(info.Names)
 					if ce.BlockNum == info.SignTime {
 						e := model.NftSignature{
 							EventIndex:   ce.EventIndex,

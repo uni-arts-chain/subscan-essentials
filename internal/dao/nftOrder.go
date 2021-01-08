@@ -22,8 +22,8 @@ func (d *Dao) CreateNftOrder(txn *GormDB, ce *model.ChainEvent) error {
 		sender = util.ToString(params[4]["value"])
 	}
 
-	collectionId,_ := strconv.Atoi(util.ToString(cid))
-	itemId,_ := strconv.Atoi(util.ToString(iid))
+	collectionId, _ := strconv.Atoi(util.ToString(cid))
+	itemId, _ := strconv.Atoi(util.ToString(iid))
 	e := model.NftOrder{
 		EventIndex:   ce.EventIndex,
 		BlockNum:     ce.BlockNum,
@@ -50,8 +50,8 @@ func (d *Dao) CreateNftOrderCancel(txn *GormDB, ce *model.ChainEvent) error {
 	util.UnmarshalAny(&params, ce.Params)
 	cid := params[0]["value"]
 	iid := params[1]["value"]
-	collectionId,_ := strconv.Atoi(util.ToString(cid))
-	itemId,_ := strconv.Atoi(util.ToString(iid))
+	collectionId, _ := strconv.Atoi(util.ToString(cid))
+	itemId, _ := strconv.Atoi(util.ToString(iid))
 	e := model.NftOrder{
 		EventIndex:   ce.EventIndex,
 		BlockNum:     ce.BlockNum,
@@ -71,8 +71,8 @@ func (d *Dao) CreateNftOrderSucceed(txn *GormDB, ce *model.ChainEvent) error {
 	cid := params[0]["value"]
 	iid := params[1]["value"]
 	sender := params[2]["value"]
-	collectionId,_ := strconv.Atoi(util.ToString(cid))
-	itemId,_ := strconv.Atoi(util.ToString(iid))
+	collectionId, _ := strconv.Atoi(util.ToString(cid))
+	itemId, _ := strconv.Atoi(util.ToString(iid))
 	e := model.NftOrder{
 		EventIndex:   ce.EventIndex,
 		BlockNum:     ce.BlockNum,
@@ -86,4 +86,3 @@ func (d *Dao) CreateNftOrderSucceed(txn *GormDB, ce *model.ChainEvent) error {
 	query := txn.Create(&e)
 	return d.checkDBError(query.Error)
 }
-
