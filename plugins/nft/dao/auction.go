@@ -50,7 +50,7 @@ func NewAuction(db storage.DB, paramEvent []storage.EventParam, event *storage.E
 					Value:        value,
 					StartPrice:   startPrice,
 					Sender:       sender,
-					Status:       "created",
+					Status:       "create",
 				}
 				json.Unmarshal([]byte(dataD), &auction)
 
