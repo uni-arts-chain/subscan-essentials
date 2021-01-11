@@ -12,12 +12,12 @@ type Auction struct {
 	ExtrinsicIdx int             `json:"extrinsic_idx"`
 	CollectionId int             `gorm:"column:collection_id; default:null" json:"collection_id"`
 	ItemId       int             `gorm:"column:item_id; default:null" json:"item_id"`
-	Value        decimal.Decimal `gorm:"column:value; type:decimal(32,16);default:null" json:"value"`
+	Value        decimal.Decimal `gorm:"column:value; type:decimal(32,0);default:null" json:"value"`
 	Owner        string          `gorm:"column:owner;default:null" json:"owner"`
-	StartPrice   decimal.Decimal `gorm:"column:start_price; type:decimal(32,16);default:null" json:"start_price"`
-	CurrentPrice decimal.Decimal `gorm:"column:current_price; type:decimal(32,16);default:null" json:"current_price"`
-	Increment    decimal.Decimal `gorm:"column:increment; type:decimal(32,16);default:null" json:"increment"`
-	BidPrice     decimal.Decimal `gorm:"column:bid_price; type:decimal(32,16);default:null" json:"bid_price"`
+	StartPrice   decimal.Decimal `gorm:"column:start_price; type:decimal(32,0);default:null" json:"start_price"`
+	CurrentPrice decimal.Decimal `gorm:"column:current_price; type:decimal(32,0);default:null" json:"current_price"`
+	Increment    decimal.Decimal `gorm:"column:increment; type:decimal(32,0);default:null" json:"increment"`
+	BidPrice     decimal.Decimal `gorm:"column:bid_price; type:decimal(32,0);default:null" json:"bid_price"`
 	StartTime    int             `gorm:"column:start_time; default:null" json:"start_time"`
 	EndTime      int             `gorm:"column:end_time; default:null" json:"end_time"`
 	EventIdx     int             `json:"event_idx"`

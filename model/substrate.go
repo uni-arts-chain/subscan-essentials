@@ -178,8 +178,8 @@ type NftOrder struct {
 	ExtrinsicIdx int             `json:"extrinsic_idx"`
 	CollectionId int             `gorm:"column:collection_id; default:null" json:"collection_id"`
 	ItemId       int             `gorm:"column:item_id; default:null" json:"item_id"`
-	Value        decimal.Decimal `gorm:"column:value; type:decimal(32,16);default:null" json:"value"`
-	Price        decimal.Decimal `gorm:"column:price; type:decimal(32,16);default:null" json:"price"`
+	Value        decimal.Decimal `gorm:"column:value; type:decimal(32,0);default:null" json:"value"`
+	Price        decimal.Decimal `gorm:"column:price; type:decimal(32,0);default:null" json:"price"`
 	Sender       string          `json:"sender"`
 	Status       string          `gorm:"type:varchar(50)" json:"status"`
 	EventIdx     int             `json:"event_idx"`
