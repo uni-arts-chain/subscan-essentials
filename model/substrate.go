@@ -165,10 +165,7 @@ type NftItem struct {
 }
 
 func (c NftItem) TableName() string {
-	if c.BlockNum/SplitTableBlockNum == 0 {
-		return "nft_items"
-	}
-	return fmt.Sprintf("nft_items_%d", c.BlockNum/SplitTableBlockNum)
+	return "nft_items"
 }
 
 type NftOrder struct {
@@ -186,10 +183,7 @@ type NftOrder struct {
 }
 
 func (c NftOrder) TableName() string {
-	if c.BlockNum/SplitTableBlockNum == 0 {
-		return "nft_orders"
-	}
-	return fmt.Sprintf("nft_orders_%d", c.BlockNum/SplitTableBlockNum)
+	return "nft_orders"
 }
 
 type Name struct {
@@ -205,10 +199,7 @@ type Name struct {
 }
 
 func (c Name) TableName() string {
-	if c.BlockNum/SplitTableBlockNum == 0 {
-		return "names"
-	}
-	return fmt.Sprintf("names_%d", c.BlockNum/SplitTableBlockNum)
+	return "names"
 }
 
 type NftSignature struct {
@@ -227,10 +218,7 @@ type NftSignature struct {
 }
 
 func (c NftSignature) TableName() string {
-	if c.BlockNum/SplitTableBlockNum == 0 {
-		return "nft_signatures"
-	}
-	return fmt.Sprintf("nft_signatures_%d", c.BlockNum/SplitTableBlockNum)
+	return "nft_signatures"
 }
 
 type ExtrinsicParam struct {
